@@ -1,1 +1,48 @@
-<p>add-to-do-page works!</p>
+<div class="container mx-auto w-full max-w-lg px-2 sm:px-0">
+  <h1>Nowe zadanie</h1>
+  <form class="mt-5" [formGroup]="addToDoForm" (ngSubmit)="submit()">
+    <div class="flex flex-wrap mb-6 px-1">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="content">
+        Zadanie
+      </label>
+      <input [formControlName]="'content'"
+             [class.border-red-500]="isControlInvalid('content')"
+             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+             id="content" type="text" placeholder="Nazwa zadania">
+      <p [ngClass]="isControlInvalid('content') ? 'visible' : 'invisible'" class="text-red-500 text-xs italic">Proszę
+        uzupełnić to pole</p>
+    </div>
+
+    <div class="flex flex-wrap mb-6">
+      <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-location">
+          Lokalizacja
+        </label>
+        <input [formControlName]="'location'"
+               [class.border-red-500]="isControlInvalid('location')"
+               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 pl leading-tight focus:outline-none focus:bg-white"
+               id="grid-location" type="text" placeholder="Lokalizacja">
+        <p [ngClass]="isControlInvalid('location') ? 'visible' : 'invisible'" class="text-red-500 text-xs italic">Proszę
+          uzupełnić to pole</p>
+      </div>
+      <div class="w-full md:w-1/2 px-1">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-date">
+          Data
+        </label>
+        <input [formControlName]="'date'"
+               [class.border-red-500]="isControlInvalid('date')"
+               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+               id="grid-date" type="text" placeholder="Data (DD.MM.YYYY)">
+        <p [ngClass]="isControlInvalid('date') ? 'visible' : 'invisible'" class="text-red-500 text-xs italic">Proszę
+          uzupełnić to pole</p>
+      </div>
+    </div>
+  </form>
+
+  <div class="text-center">
+    <button (click)="submit()"
+            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+      Dodaj zadanie
+    </button>
+  </div>
+</div>

@@ -13,7 +13,7 @@ export const todoData: TodoConfig[] = [
   },
   {
     date: '16.01.2024',
-      location: 'Polkowice',
+    location: 'Polkowice',
     content: 'Zrobić zakupy',
     display: false
   },
