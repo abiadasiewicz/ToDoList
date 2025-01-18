@@ -1,11 +1,15 @@
+<app-alert *ngIf="showLocationError()" (close)="hideLocationError()">
+  <div>Nie znaleziono lokalizacji pierwszego zadania</div>
+</app-alert>
+
 <div class="container mx-auto px-2">
-<h1>Lista zadań</h1>
-  <app-filter (filteredValue)="onFilteredValueChange($event)" class = "block mb-5 w-full md:w-1/3"/>
+  <h1>Lista zadań</h1>
+  <app-filter (filteredValue)="onFilteredValueChange($event)" class="block mb-5 w-full md:w-1/3"/>
   <ng-container *ngFor="let toDo of toDos()">
-    <app-to-do-list-item *ngIf="toDo.display"
-                         [content]="toDo.content"
-                         [date]="toDo.date"
-                         [location]="toDo.location"
+    <app-to-do-list-item *ngIf="toDo?.display"
+                         [content]="toDo?.content"
+                         [date]="toDo?.date"
+                         [location]="toDo?.location?.city"
     />
   </ng-container>
 </div>

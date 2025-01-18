@@ -1,31 +1,11 @@
 import {Injectable, Signal, signal} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
 import {TodoConfig, todoData} from "../../todo-mocked-data";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodosService {
-  private todoSignal = signal<TodoConfig[]>([
-    {
-      date: '17.01.2025',
-      location: 'Wroclaw',
-      content: 'Zrobić zadanie od CCC',
-      display: true
-    },
-    {
-      date: '18.01.2025',
-      location: 'Wroclaw',
-      content: 'Nakaramić kota',
-      display: true
-    },
-    {
-      date: '16.01.2025',
-      location: 'Polkowice',
-      content: 'Zrobić zakupy',
-      display: false
-    }
-  ]);
+  private todoSignal = signal<TodoConfig[]>(todoData);
 
   getToDos(): Signal<TodoConfig[]> {
     return this.todoSignal;
@@ -33,5 +13,17 @@ export class TodosService {
 
   addToDo(newToDo: TodoConfig): void {
     this.todoSignal.update((todos) => [...todos, newToDo]);
+  }
+
+  editFirstTodo(valuesToUpdate: Partial<TodoConfig>) {
+    this.editTodo(0, valuesToUpdate);
+  }
+
+  private editTodo(index: number, valuesToUpdate: Partial<TodoConfig>): void {
+    this.todoSignal.update((todos) =>
+      todos.map((todo, i) =>
+        i === index ? {...todo, ...valuesToUpdate} : todo
+      )
+    );
   }
 }

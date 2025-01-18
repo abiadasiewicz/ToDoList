@@ -42,7 +42,10 @@ export class AddToDoPageComponent {
 
   private getFormData(): TodoConfig {
     return {
-      ...this.addToDoForm.value,
+      ...this.addToDoForm?.value,
+      location: {
+        city: this.addToDoForm?.get('location')?.value
+      },
       display: true,
     };
   }
