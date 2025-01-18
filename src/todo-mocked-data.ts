@@ -1,20 +1,19 @@
-
-export const todoData: TodoConfig[]=[
+export const todoData: TodoConfig[] = [
   {
-    date: '2024-01-17',
+    date: '17.01.2024',
     location: 'Wroclaw',
     content: 'Zrobić zadanie od CCC',
     display: true
   },
   {
-    date: '2024-01-17',
+    date: '18.01.2024',
     location: 'Wroclaw',
     content: 'Nakaramić kota',
     display: true
   },
   {
-    date: '2024-01-17',
-    location: 'Wroclaw',
+    date: '16.01.2024',
+      location: 'Polkowice',
     content: 'Zrobić zakupy',
     display: false
   },
