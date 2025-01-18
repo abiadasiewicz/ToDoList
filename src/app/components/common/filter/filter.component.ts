@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit, output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {debounceTime, Subject, takeUntil} from "rxjs";
 
@@ -12,7 +12,7 @@ import {debounceTime, Subject, takeUntil} from "rxjs";
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent implements OnInit, OnDestroy {
-  @Output() filteredValue = new EventEmitter<string>();
+  filteredValue = output<string>();
   destroy$ = new Subject<void>();
   filterForm = new FormGroup({
     filterAll: new FormControl<string>('')

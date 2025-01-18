@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass} from "@angular/common";
 import {dateValidator} from "../../../utils/date-validator";
-import {TodoConfig, todoData} from "../../../../todo-mocked-data";
+import {TodoConfig} from "../../../../todo-mocked-data";
+import {TodosService} from "../../../services/todos.service";
 
 @Component({
   selector: 'app-add-to-do-page',
@@ -17,7 +18,7 @@ import {TodoConfig, todoData} from "../../../../todo-mocked-data";
 export class AddToDoPageComponent {
   addToDoForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private todosService: TodosService) {
     this.addToDoForm = this.fb.group({
       content: ['', Validators.required],
       date: ['', [Validators.required, dateValidator]],
@@ -30,20 +31,19 @@ export class AddToDoPageComponent {
     return !!(control?.touched && control?.invalid);
   }
 
-  submit() {
+  submit(): void {
     this.addToDoForm.markAllAsTouched();
     if (this.addToDoForm.valid) {
-      todoData.push(this.getFormData());
+      const newToDo: TodoConfig = this.getFormData();
+      this.todosService.addToDo(newToDo);
       this.addToDoForm.reset();
     }
   }
 
   private getFormData(): TodoConfig {
     return {
-      content: this.addToDoForm.get('content')?.value ?? '',
-      date: this.addToDoForm.get('date')?.value ?? '',
-      location: this.addToDoForm.get('location')?.value ?? '',
-      display: true
-    }
+      ...this.addToDoForm.value,
+      display: true,
+    };
   }
 }
