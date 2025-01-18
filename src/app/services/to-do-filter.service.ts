@@ -16,12 +16,12 @@ export class ToDoFilterService {
         if (key === 'display') return false;
 
         const fieldValue = toDo[key]?.toString().toLowerCase();
-        return fieldValue.includes(lowerCaseFilterValue);
+        return fieldValue?.includes(lowerCaseFilterValue);
       });
     });
 
     todoData.forEach(toDo => {
-      toDo.display = filteredToDos.includes(toDo);
+      toDo.display = filteredToDos?.includes(toDo);
     });
 
     return filteredToDos;

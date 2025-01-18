@@ -28,6 +28,7 @@ export const todoData: TodoConfig[] = [
 export interface TodoConfig {
   date: string;
   location: Location;
+  temperature?: string;
   content: string;
   display: boolean;
 }

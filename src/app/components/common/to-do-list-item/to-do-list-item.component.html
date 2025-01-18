@@ -2,6 +2,10 @@
   <p class="flex-1 w-auto mx-2">{{ content() }}</p>
   <div class="w-px h-8 mx-1 bg-gray-300"></div>
   <p class="flex-none w-1/8 mx-2">{{ location() }}</p>
+  <ng-container *ngIf="temperature()">
+    <div class="w-px h-8 mx-1 bg-gray-300"></div>
+    <p class="flex-none w-1/8 mx-2">{{ temperature() }}&#8451;</p>
+  </ng-container>
   <div class="w-px h-8 mx-1 bg-gray-300"></div>
   <p class="flex-none w-1/8 mx-2">{{ date() }}</p>
 </div>
