@@ -19,7 +19,7 @@ import {TodosService} from "../../../services/todos.service";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   protected readonly faGhost = faGhost;
   isMobileMenuOpen = false;
@@ -30,11 +30,6 @@ export class HeaderComponent implements OnInit {
   });
 
   constructor(private todoService: TodosService) {
-  }
-
-  ngOnInit(): void {
-    dayjs.extend(isSameOrAfter);
-    dayjs.extend(customParseFormat);
   }
 
   toggleMenu() {

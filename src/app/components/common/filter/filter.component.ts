@@ -13,15 +13,17 @@ import {debounceTime, Subject, takeUntil} from "rxjs";
 })
 export class FilterComponent implements OnInit, OnDestroy {
   filteredValue = output<string>();
+
   destroy$ = new Subject<void>();
   filterForm = new FormGroup({
     filterAll: new FormControl<string>('')
   });
 
   ngOnInit() {
-    this.filterForm.controls['filterAll'].valueChanges.pipe(debounceTime(1000), takeUntil(this.destroy$))
+    this.filterForm.controls['filterAll'].valueChanges
+      .pipe(debounceTime(1000), takeUntil(this.destroy$))
       .subscribe((formData) => {
-        formData ? this.filteredValue.emit(formData) : this.filteredValue.emit('');
+        this.filteredValue.emit(formData ?? '');
       });
   }
 

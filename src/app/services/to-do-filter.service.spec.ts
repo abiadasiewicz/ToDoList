@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ToDoFilterService} from './to-do-filter.service';
-import {TodoConfig} from "../../todo-mocked-data";
+import {TodoConfig} from "../../todo-data";
 
 describe('ToDoFilterService', () => {
   let service: ToDoFilterService;
@@ -13,19 +13,19 @@ describe('ToDoFilterService', () => {
   const mockedData: TodoConfig[] = [
     {
       date: '17.01.2024',
-      location: 'Wroclaw',
+      city: 'Wroclaw',
       content: 'Zrobić zadanie od CCC',
       display: true
     },
     {
       date: '18.01.2024',
-      location: 'Wroclaw',
+      city: 'Wroclaw',
       content: 'Nakaramić kota',
       display: true
     },
     {
       date: '16.01.2024',
-      location: 'Polkowice',
+      city: 'Polkowice',
       content: 'Zrobić zakupy',
       display: false
     },
@@ -45,9 +45,9 @@ describe('ToDoFilterService', () => {
     const filtered = service.filterValue('Wroc', mockedData);
 
     expect(filtered.length).toBe(2);
-    expect(filtered[0].location).toBe('Wroclaw');
+    expect(filtered[0].city).toBe('Wroclaw');
     expect(mockedData[0].display).toBeTrue();
-    expect(filtered[1].location).toBe('Wroclaw');
+    expect(filtered[1].city).toBe('Wroclaw');
     expect(mockedData[1].display).toBeTrue();
     expect(mockedData[2].display).toBeFalse();
   });

@@ -1,5 +1,5 @@
 import {Injectable, Signal, signal} from '@angular/core';
-import {TodoConfig, todoData} from "../../todo-mocked-data";
+import {TodoConfig, todoData} from "../../todo-data";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class TodosService {
     this.todoSignal.update((todos) => [...todos, newToDo]);
   }
 
-  editFirstTodo(valuesToUpdate: Partial<TodoConfig>) {
+  editFirstTodo(valuesToUpdate: Partial<TodoConfig>): void {
     this.editTodo(0, valuesToUpdate);
   }
 

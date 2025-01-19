@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Coordinates} from "../../todo-data";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherApiService {
 
+  //można też dodać do environment.ts
   private geocodingBaseUrl = 'https://geocoding-api.open-meteo.com/v1/search';
   private openMeteoBaseUrl = 'https://api.open-meteo.com/v1/forecast';
 
@@ -19,13 +21,13 @@ export class WeatherApiService {
   }
 
   // jak wyżej
-  getWeather(latitude: string, longitude: string): Observable<any> {
-    return this.httpClient.get(this.getMeteoUrl(latitude, longitude));
+  getWeather(coordinates: Coordinates): Observable<any> {
+    return this.httpClient.get(this.getMeteoUrl(coordinates));
   }
 
-  private getGeocodingUrl(name: string): string {
+  private getGeocodingUrl(city: string): string {
     const params = new URLSearchParams({
-      name,
+      name: city,
       count: '10',
       language: 'pl',
       format: 'json'
@@ -34,10 +36,14 @@ export class WeatherApiService {
     return `${this.geocodingBaseUrl}?${params.toString()}`;
   }
 
-  private getMeteoUrl(latitude: string, longitude: string): string {
+  private getMeteoUrl(coordinates: Coordinates): string {
+    if (!coordinates?.latitude || !coordinates?.longitude) {
+      throw new Error('Niepełne dane współrzędnych.');
+    }
+
     const params = new URLSearchParams({
-      latitude,
-      longitude,
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
       current: 'temperature_2m',
     });
 

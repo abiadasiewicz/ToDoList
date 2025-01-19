@@ -12,8 +12,9 @@ export const routes: Routes = [
     path: 'add-to-do',
     loadComponent: () => import('./components/pages/add-to-do-page/add-to-do-page.component').then(c => c.AddToDoPageComponent)
   }, {
-    //TODO tutaj powinno być przekierowanie do strony Page Not Found
+    //TODO tutaj powinno być przekierowanie do strony PageNotFound
     path: '**',
-    loadComponent: () => import('./components/pages/to-do-list-page/to-do-list-page.component').then(c => c.ToDoListPageComponent)
+    redirectTo: 'to-do-list',
+    pathMatch: 'full',
   },
 ];

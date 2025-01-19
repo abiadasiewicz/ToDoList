@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass} from "@angular/common";
 import {dateValidator} from "../../../utils/date-validator";
-import {TodoConfig} from "../../../../todo-mocked-data";
+import {TodoConfig} from "../../../../todo-data";
 import {TodosService} from "../../../services/todos.service";
 
 @Component({
@@ -34,7 +34,9 @@ export class AddToDoPageComponent {
   submit(): void {
     this.addToDoForm.markAllAsTouched();
     if (this.addToDoForm.valid) {
+
       const newToDo: TodoConfig = this.getFormData();
+
       this.todosService.addToDo(newToDo);
       this.addToDoForm.reset();
     }
@@ -43,9 +45,7 @@ export class AddToDoPageComponent {
   private getFormData(): TodoConfig {
     return {
       ...this.addToDoForm?.value,
-      location: {
-        city: this.addToDoForm?.get('location')?.value
-      },
+        city: this.addToDoForm?.get('location')?.value,
       display: true,
     };
   }
